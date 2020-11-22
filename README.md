@@ -8,6 +8,7 @@ Command line tool to manage dotfiles
 
 ## Commands
 |Command|Description|
+|-------|-----------|
 |dotfile init|Init dotfile project and repository|
 |dotfile add <file>|Add file to be synced|
 |dotfile rm <file>|Remove file from being managed|
