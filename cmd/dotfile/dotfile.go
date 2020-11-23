@@ -7,7 +7,18 @@ import (
 	"os"
 )
 
-var info = color.New(color.FgHiGreen, color.Bold)
+
+var (
+	info = color.New(color.FgHiGreen, color.Bold)
+
+	initCmd  = flag.NewFlagSet("init", flag.ExitOnError)
+	lsCmd  = flag.NewFlagSet("ls", flag.ExitOnError)
+	addCmd = flag.NewFlagSet("add", flag.ExitOnError)
+	rmCmd  = flag.NewFlagSet("rm", flag.ExitOnError)
+	editCmd  = flag.NewFlagSet("edit", flag.ExitOnError)
+	pullCmd  = flag.NewFlagSet("pull", flag.ExitOnError)
+	pushCmd  = flag.NewFlagSet("push", flag.ExitOnError)
+)
 
 func PrintUsage() {
 	fmt.Print(
@@ -25,9 +36,6 @@ func PrintUsage() {
 }
 
 func main() {
-	listSet := flag.NewFlagSet("ls", flag.ExitOnError)
-	addSet := flag.NewFlagSet("add", flag.ExitOnError)
-	removeSet := flag.NewFlagSet("rm", flag.ExitOnError)
 
 	if len(os.Args) < 2 {
 		PrintUsage()
@@ -36,21 +44,25 @@ func main() {
 
 	switch os.Args[1] {
 	case "ls":
-		listSet.Parse(os.Args[2:])
+		lsCmd.Parse(os.Args[2:])
 		info.Println("ls command")
 	case "add":
-		addSet.Parse(os.Args[2:])
+		addCmd.Parse(os.Args[2:])
 		info.Println("add command")
 	case "rm":
-		removeSet.Parse(os.Args[2:])
+		rmCmd.Parse(os.Args[2:])
 		info.Println("rm command")
 	case "edit":
+		editCmd.Parse(os.Args[2:])
 		info.Println("edit command")
 	case "init":
+		initCmd.Parse(os.Args[2:])
 		info.Println("init command")
 	case "pull":
+		pullCmd.Parse(os.Args[2:])
 		info.Println("pull command")
 	case "push":
+		pushCmd.Parse(os.Args[2:])
 		info.Println("push command")
 	default:
 		PrintUsage()
