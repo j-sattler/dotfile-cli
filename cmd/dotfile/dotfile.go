@@ -1,10 +1,9 @@
 package main
 
 import (
-	"github.com/j-sattler/dotfile-cli/cli"
-	"os"
+	"github.com/j-sattler/dotfile-cli/internal/dfcli"
 )
 
 func main() {
-	cli.Run(os.Args)
+	dfcli.Run()
 }
