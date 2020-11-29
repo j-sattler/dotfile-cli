@@ -23,6 +23,16 @@ The commands are:
     remote  configure git remote repo
 ```
 
+## Install from source
+
+From the root of this project run:
+
+```bash
+go install cmd/dotfile/dotfile.go
+``` 
+
+## To Do
+
 - [x] init command
 - [ ] add command
 - [ ] rm command
