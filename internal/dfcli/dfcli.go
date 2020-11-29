@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/fatih/color"
 	"github.com/go-git/go-git/v5"
+	"io/ioutil"
 	"os"
 )
 
@@ -14,6 +15,7 @@ type Dotfile struct {
 
 const (
 	dotfileDirName = ".dotfile"
+	main           = "main"
 )
 
 var (
@@ -74,18 +76,30 @@ func initialize() {
 	dotfile := Dotfile{}
 	dotfile.determineConfDir()
 
+	// create config directory
 	err := os.MkdirAll(dotfile.confPath, os.ModePerm)
 	if err != nil {
 		fmt.Printf("Failed to create config file directory: %s\n", err)
 		os.Exit(1)
 	}
 
-	_ , err = git.PlainInit(dotfile.confPath, false)
+	// initialize git repository in config dir
+	_, err = git.PlainInit(dotfile.confPath, false)
 
 	if err != nil {
 		fmt.Printf("Failed to initialize git repository: %s\n", err)
+		os.Exit(1)
 	}
 
+	ref := []byte("ref: refs/heads/main")
+
+	// change default branch from master to main
+	err = ioutil.WriteFile(fmt.Sprintf("%s/%s", dotfile.confPath, ".git/HEAD"), ref, 0664)
+
+	if err != nil {
+		fmt.Printf("Failed to change branch name: %s\n", err)
+		os.Exit(1)
+	}
 
 	_, _ = info.Printf("Initialized empty dotfile project in %s\n", dotfile.confPath)
 
@@ -99,14 +113,14 @@ func (d *Dotfile) determineConfDir() {
 	if err != nil {
 		// could not determine user config dir
 		// try user home dir as fallback
-		dir , err = os.UserHomeDir()
+		dir, err = os.UserHomeDir()
 		if err != nil {
 			// could neither determine home nor config dir
 			fmt.Printf("Could not determine user home or config directory: %s\n", err)
 			os.Exit(1)
 		}
 	}
-	// if place dotfile config
+	// set confPath to absolute dotfile path
 	d.confPath = fmt.Sprintf("%s/%s", dir, dotfileDirName)
 }
 
@@ -148,4 +162,3 @@ func help() {
 	printUsage()
 	os.Exit(1)
 }
-
