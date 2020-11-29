@@ -20,4 +20,14 @@ The commands are:
     push    push dotfiles to git repository
     pull    pull dotfiles from git repository
     edit    edit dotfile
+    remote  configure git remote repo
 ```
+
+- [x] init command
+- [ ] add command
+- [ ] rm command
+- [ ] ls command
+- [ ] push command
+- [ ] pull command
+- [ ] edit command
+- [ ] remote command
