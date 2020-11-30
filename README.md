@@ -31,6 +31,10 @@ From the root of this project run:
 go install cmd/dotfile/dotfile.go
 ``` 
 
+## How it works
+dotfile is basically a wrapper for git that helps to manage dotfiles more easily.
+Therefore, you can use the dotfile command in any directory or git directly inside the dotfile config directory.
+
 ## To Do
 
 - [x] init command
