@@ -41,3 +41,8 @@ go install cmd/dotfile/dotfile.go
 - [ ] pull command
 - [ ] edit command
 - [ ] remote command
+
+## Third Party Libraries
+
+* [**go-git/go-git**](https://github.com/go-git/go-git)
+* [**fatih/color**](https://github.com/fatih/color)
